@@ -1,0 +1,115 @@
+# ==========================
+# Unity generated folders
+# ==========================
+
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+UserSettings/
+MemoryCaptures/
+Recordings/
+
+# ==========================
+# Visual Studio / Rider
+# ==========================
+
+.vs/
+.vscode/
+.idea/
+
+# ==========================
+# Visual Studio files
+# ==========================
+
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+
+# ==========================
+# MonoDevelop
+# ==========================
+
+*.pidb.meta
+
+# ==========================
+# Crash reports
+# ==========================
+
+sysinfo.txt
+
+# ==========================
+# Build outputs
+# ==========================
+
+*.apk
+*.aab
+*.unitypackage
+*.app
+*.exe
+*.ipa
+
+# ==========================
+# OS files
+# ==========================
+
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# ==========================
+# Logs
+# ==========================
+
+*.log
+
+# ==========================
+# Temporary files
+# ==========================
+
+*.tmp
+*.bak
+*.old
+*.orig
+*.cache
+
+# ==========================
+# JetBrains Rider
+# ==========================
+
+.idea/
+
+# ==========================
+# VS Code
+# ==========================
+
+.history/
+
+# ==========================
+# Unity Collaborate
+# ==========================
+
+.collabignore
+
+# ==========================
+# Addressables
+# ==========================
+
+ServerData/
+
+# ==========================
+# Ignore generated project files
+# ==========================
+
+ExportedObj/
