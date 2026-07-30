@@ -2,12 +2,14 @@ using UnityEngine;
 
 public class ControlPelota : MonoBehaviour
 {
-    public Transform jugador;          // Referencia al jugador
+    public Transform jugador;
     public float distanciaControl = 1.2f;
-    public float fuerzaPateo = 12f;
+    public float distanciaFrente = 0.8f;
+    public float velocidadSeguimiento = 8f;
+    public float fuerzaPase = 10f;
 
     private Rigidbody rb;
-    private bool tienePelota = false;
+    private bool controlando = false;
 
     void Start()
     {
@@ -16,49 +18,41 @@ public class ControlPelota : MonoBehaviour
 
     void Update()
     {
-        float distancia = Vector3.Distance(transform.position, jugador.position);
-
-        // Si el jugador está cerca, controla la pelota
-        if (distancia <= distanciaControl)
+        if (controlando && Input.GetKeyDown(KeyCode.Space))
         {
-            tienePelota = true;
-        }
-        else
-        {
-            tienePelota = false;
-        }
-
-        // Patear con Espacio
-        if (tienePelota && Input.GetKeyDown(KeyCode.Space))
-        {
-            rb.isKinematic = false;
-
-            Vector3 direccion = jugador.forward;
-
-            rb.AddForce(direccion * fuerzaPateo, ForceMode.Impulse);
-
-            tienePelota = false;
+            Patear();
         }
     }
 
     void FixedUpdate()
     {
-        if (tienePelota)
+        float distancia = Vector3.Distance(transform.position, jugador.position);
+
+        controlando = distancia <= distanciaControl;
+
+        if (controlando)
         {
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
 
-            Vector3 posicionDeseada =
-                jugador.position +
-                jugador.forward * 0.8f;
-
-            posicionDeseada.y = 0.25f;
+            Vector3 destino = jugador.position + jugador.forward * distanciaFrente;
+            destino.y = 0.25f;
 
             transform.position = Vector3.Lerp(
                 transform.position,
-                posicionDeseada,
-                12f * Time.fixedDeltaTime
+                destino,
+                velocidadSeguimiento * Time.fixedDeltaTime
             );
         }
+    }
+
+    void Patear()
+    {
+        controlando = false;
+
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+
+        rb.AddForce(jugador.forward * fuerzaPase, ForceMode.Impulse);
     }
 }
