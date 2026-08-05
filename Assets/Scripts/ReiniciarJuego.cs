@@ -11,6 +11,7 @@ public class ReiniciarJuego : MonoBehaviour
     private Vector3 posicionInicialPelota;
 
     private Rigidbody rbPelota;
+    private MovimientoPelota movimientoPelota;
 
     void Awake()
     {
@@ -23,6 +24,7 @@ public class ReiniciarJuego : MonoBehaviour
         posicionInicialPelota = pelota.position;
 
         rbPelota = pelota.GetComponent<Rigidbody>();
+        movimientoPelota = pelota.GetComponent<MovimientoPelota>();
     }
 
     public void ReiniciarPosiciones()
@@ -32,5 +34,7 @@ public class ReiniciarJuego : MonoBehaviour
 
         jugador.position = posicionInicialJugador;
         pelota.position = posicionInicialPelota;
+
+        movimientoPelota.ReiniciarMovimiento();
     }
 }

@@ -26,10 +26,12 @@ public class ControlPelota : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Solo toma el control si aún no la estaba controlando
         if (!controlando)
         {
-            float distancia = Vector3.Distance(transform.position, jugador.position);
+            float distancia = Vector3.Distance(
+                transform.position,
+                jugador.position
+            );
 
             if (distancia <= distanciaControl)
             {
@@ -39,17 +41,21 @@ public class ControlPelota : MonoBehaviour
 
         if (controlando)
         {
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
+            Vector3 destino =
+                jugador.position +
+                jugador.forward * distanciaFrente;
 
-            Vector3 destino = jugador.position + jugador.forward * distanciaFrente;
-            destino.y = 0.25f;
+            Vector3 nuevaPosicion = transform.position;
 
-            transform.position = Vector3.Lerp(
-                transform.position,
-                destino,
+            nuevaPosicion.z = Mathf.Lerp(
+                transform.position.z,
+                destino.z,
                 velocidadSeguimiento * Time.fixedDeltaTime
             );
+
+            nuevaPosicion.y = 0.25f;
+
+            transform.position = nuevaPosicion;
         }
     }
 
@@ -57,9 +63,9 @@ public class ControlPelota : MonoBehaviour
     {
         controlando = false;
 
-        rb.linearVelocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
-
-        rb.AddForce(jugador.forward * fuerzaPase, ForceMode.Impulse);
+        rb.AddForce(
+            jugador.forward * fuerzaPase,
+            ForceMode.Impulse
+        );
     }
 }
