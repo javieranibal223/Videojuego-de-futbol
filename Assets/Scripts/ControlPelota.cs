@@ -26,9 +26,16 @@ public class ControlPelota : MonoBehaviour
 
     void FixedUpdate()
     {
-        float distancia = Vector3.Distance(transform.position, jugador.position);
+        // Solo toma el control si aún no la estaba controlando
+        if (!controlando)
+        {
+            float distancia = Vector3.Distance(transform.position, jugador.position);
 
-        controlando = distancia <= distanciaControl;
+            if (distancia <= distanciaControl)
+            {
+                controlando = true;
+            }
+        }
 
         if (controlando)
         {
